@@ -32,20 +32,47 @@
         <section id="hero">
           <div class="side-content">
             <h3>Recommended for you</h3>
-            <h2 class="hero-title">Pride and Prejudice</h2>
-            <p>by Jane Austen</p>
-            <p class="description">A classic novel of manners that explores the themes of love, reputation, and social class in 19th century England.</p>
-            <button class="button">Read now</button>
+            <h2 id="hero-title" class="hero-title">Pride and Prejudice</h2>
+            <p id="hero-author">by Jane Austen</p>
+            <p id="hero-description" class="description">A classic novel of manners that explores the themes of love, reputation, and social class in 19th century England.</p>
+            <a id="hero-read-link" class="button" href="https://books.google.com/books?id=0eMIAAAAQAAJ" target="_blank" rel="noreferrer">Read now</a>
+            <p id="hero-status" class="sr-only" aria-live="polite"></p>
           </div>
           <div class="hero-image">
-            <img src="/src/assets/hero.png" alt="Pride and Prejudice book cover">
+            <img id="hero-cover" src="/src/assets/hero.png" alt="Pride and Prejudice book cover">
           </div>
         </section>
-      </main>
-      <footer>
-        <p>Created with ❤️ by Brian Ito. © 2026</p>
-      </footer>
-    </div>
-    <script type="module" src="/src/js/main.js"></script>
-  </body>
-</html>
+        <article id="featured">
+          <section>
+            <div class="section-header">
+              <h2>Your readings</h2>
+            </div>
+            <div class="card">
+              <div class="card-content">
+                <h3>To Kill a Mockingbird</h3>
+                <p class="author">by Harper Lee</p>
+                <p class="description">A novel set in the American South during the 1930s, exploring themes of racial injustice and moral growth.</p>
+              </div>
+            </div>
+          </section>
+            <section>
+              <div class="section-header">
+                <h2>Your goals</h2>
+                <button>+</button>
+              </div>
+              <div class="card">
+                <div class="section-header">
+                  <h5>Read 20 books this year</h5>
+                  <button>☑︎</button>
+                </div>
+              </div>
+            </section>
+          </article>
+        </main>
+        <footer>
+          <p>Created with ❤️ by Brian Ito. © 2026</p>
+        </footer>
+      </div>
+      <script type="module" src="/src/js/main.js"></script>
+    </body>
+  </html>

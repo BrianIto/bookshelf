@@ -1,4 +1,4 @@
-import { searchVolumes } from "./api/googlebooks.js";
+import { getRecommendedBook, searchVolumes } from "./api/googlebooks.js";
 import "../styles/style.css";
 
 const app = document.querySelector("#app");
@@ -81,6 +81,40 @@ function getCover(book) {
 	return image ? image.replace("http://", "https://") : "";
 }
 
+function populateHeroBook(book) {
+	const info = book.volumeInfo || {};
+	const title = info.title || "Untitled book";
+	const cover = getCover(book);
+	const heroTitle = document.querySelector("#hero-title");
+	const heroAuthor = document.querySelector("#hero-author");
+	const heroDescription = document.querySelector("#hero-description");
+	const heroCover = document.querySelector("#hero-cover");
+	const heroLink = document.querySelector("#hero-read-link");
+
+	heroTitle.textContent = title;
+	heroAuthor.textContent = `by ${info.authors?.join(", ") || "Unknown author"}`;
+	heroDescription.textContent =
+		info.description || "Discover a book selected especially for you.";
+	heroCover.src = cover || "/src/assets/hero.png";
+	heroCover.alt = `${title} book cover`;
+	heroLink.href = book.accessInfo?.webReaderLink || info.previewLink || "#";
+}
+
+async function loadHeroBook() {
+	const status = document.querySelector("#hero-status");
+	status.textContent = "Loading your recommended book.";
+
+	try {
+		const book = await getRecommendedBook();
+		if (!book) throw new Error("No recommended book found");
+		populateHeroBook(book);
+		status.textContent = "Recommended book loaded.";
+	} catch (error) {
+		console.warn("Hero book request failed:", error);
+		status.textContent = "Showing the default recommended book.";
+	}
+}
+
 function bookCard(book, index) {
 	const info = book.volumeInfo || {};
 	const title = info.title || "Untitled book";
@@ -114,17 +148,22 @@ async function loadBooks(query = "subject:fiction") {
 	}
 }
 
-document.querySelector(".search-form").addEventListener("submit", (event) => {
+const searchForm = document.querySelector(".search-form");
+const searchInput = document.querySelector("#book-search");
+const searchButton = document.querySelector(".icon-button");
+
+searchForm?.addEventListener("submit", (event) => {
 	event.preventDefault();
-	const query = document.querySelector("#book-search").value.trim();
+	const query = searchInput?.value.trim();
 	if (query) {
-		document.querySelector("#featured").scrollIntoView({
+		document.querySelector("#featured")?.scrollIntoView({
 			behavior: "smooth",
 		});
 		loadBooks(query);
 	}
 });
-document.querySelector(".icon-button").addEventListener("click", () =>
-	document.querySelector("#book-search").focus(),
-);
-loadBooks();
+searchButton?.addEventListener("click", () => searchInput?.focus());
+
+loadHeroBook();
+
+if (document.querySelector("#book-grid")) loadBooks();
