@@ -97,11 +97,6 @@ function bookCard(book, index) {
   </article>`;
 }
 
-function renderShell() {
-	app.innerHTML = `<header class="site-header"><a class="brand" href="#"><span class="brand-mark">b</span><span>bookish</span></a><nav><a class="active" href="#featured">Discover</a><a href="#categories">Categories</a><a href="#about">About us</a></nav><div class="header-actions"><button class="icon-button" aria-label="Search">${icons.search}</button><button class="profile-button" aria-label="Your profile">BM</button></div></header>
-  <main><section class="hero"><div class="hero-content"><p class="eyebrow">A good book is always a good idea</p><h1>Find your next<br><em>favorite</em> story.</h1><p class="hero-text">Curated reads for curious minds. Explore books that make you think, feel, and see the world a little differently.</p><form class="search-form"><label for="book-search" class="sr-only">Search for a book</label><span>${icons.search}</span><input id="book-search" type="search" placeholder="Search by title, author, or topic" autocomplete="off"><button type="submit">Search</button></form></div><div class="hero-art" aria-hidden="true"><div class="sun"></div><div class="line line-one"></div><div class="line line-two"></div><div class="art-book art-book-back">READ<br>MORE</div><div class="art-book art-book-front">slow<br>mornings</div><span class="scribble">✳</span></div></section><section class="featured-section" id="featured"><div class="section-heading"><div><p class="eyebrow">Handpicked for you</p><h2>Featured books</h2></div><a class="view-all" href="#featured">View all ${icons.arrow}</a></div><div class="book-grid" id="book-grid"><div class="loading-message">Gathering a few good stories<span>...</span></div></div></section><section class="topic-strip" id="categories"><div><p class="eyebrow">What are you in the mood for?</p><h2>Browse by feeling</h2></div><div class="topics"><a href="#featured">Something inspiring ${icons.chevron}</a><a href="#featured">A new perspective ${icons.chevron}</a><a href="#featured">A little escape ${icons.chevron}</a></div></section></main><footer id="about"><a class="brand" href="#"><span class="brand-mark">b</span><span>bookish</span></a><p>For the love of a good story.</p><span>© 2024 bookish</span></footer>`;
-}
-
 async function loadBooks(query = "subject:fiction") {
 	const grid = document.querySelector("#book-grid");
 	grid.innerHTML =
@@ -119,7 +114,6 @@ async function loadBooks(query = "subject:fiction") {
 	}
 }
 
-renderShell();
 document.querySelector(".search-form").addEventListener("submit", (event) => {
 	event.preventDefault();
 	const query = document.querySelector("#book-search").value.trim();
